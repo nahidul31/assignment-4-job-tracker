@@ -44,14 +44,38 @@
             <p id="Total-job" class="font-bold opacity-60">0 jobs</p>
         </div>
         <div class="mt-10 space-x-5 ">
-            <button id="allJobs" class="btn btn-soft btn-primary ">All</button>
-            <button id="interview" class="btn btn-soft btn-primary">Interview</button>
-            <button id='rejected' class="btn btn-soft btn-primary">Rejected</button>
+            <button onclick="btnop('show-all-jobs')" id="allJobs" class="btn btn-soft btn-primary ">All</button>
+            <button onclick="btnop('interview-container')" id="interview"
+                class="btn btn-soft btn-primary">Interview</button>
+            <button onclick="btnop('reajected-container')" id='rejected'
+                class="btn btn-soft btn-primary">Rejected</button>
         </div>
         <div id="show-all-jobs">
 
         </div>
 
+    </section>
+
+    <!-- interview section show  ------------------------->
+    <section id="interview-container" class="hidden mt-5 ">
+        <div class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
+            <div>
+                <img src="./img/jobs.png" alt="" srcset="">
+            </div>
+            <h1 class="text-3xl font-bold">No Jobs Available</h1>
+            <p>Check back soon for new job opportunities </p>
+        </div>
+    </section>
+
+    <!-- Rejected section show  ------------------------->
+    <section id="reajected-container" class="hidden mt-5 ">
+        <div class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
+            <div>
+                <img src="./img/jobs.png" alt="" srcset="">
+            </div>
+            <h1 class="text-3xl font-bold">No Jobs Available</h1>
+            <p>Check back soon for new job opportunities </p>
+        </div>
     </section>
 </body>
 <script src="./srcipts/machine.js"></script>

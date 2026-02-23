@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Tracker</title>
+    <!-- daisy ui +tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="container bg-gray-100 mx-auto pt-10 px-6">
+    <header>
+        <h1 class="text-4xl font-bold">Job Application Traker </h1>
+        <div class="grid grid-cols-3 gap-7">
+            <div class="bg-emerald-50 px-10 py-15 rounded-xl mt-7">
+                <h1 class="text-xl font-semibold">Total :</h1>
+                <p id="Total-job" class="text-3xl font-bold">0</p>
+            </div>
+
+            <div class="bg-emerald-50 px-10 py-15 rounded-xl mt-7">
+                <h1 class="text-xl font-semibold">Interview :</h1>
+                <p class="text-3xl font-bold text-green-400">0</p>
+            </div>
+
+            <div class="bg-emerald-50 px-10 py-15 rounded-xl mt-7">
+                <h1 class="text-xl font-semibold">Rejected :</h1>
+                <p class="text-3xl font-bold text-red-400">0</p>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- Available jobs--------------------------------------------- -->
+    <section class="mt-20">
+        <div class="flex justify-between ">
+            <h3 class="text-2xl font-semibold">Available Job</h3>
+            <p id="Total-job" class="font-bold opacity-60">0 jobs</p>
+        </div>
+        <div class="mt-10 space-x-5 ">
+            <button id="allJobs" class="btn btn-soft btn-primary ">All</button>
+            <button id="interview" class="btn btn-soft btn-primary">Interview</button>
+            <button id='rejected' class="btn btn-soft btn-primary">Rejected</button>
+        </div>
+        <div id="show-all-jobs">
+
+        </div>
+
+    </section>
+</body>
+<script src="./srcipts/machine.js"></script>
+<script src="./srcipts/allJobs.js"></script>
+
+
+</html>

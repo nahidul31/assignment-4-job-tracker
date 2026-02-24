@@ -8,6 +8,7 @@ let jobs = [
     salary: "$120,000 - $150,000",
     description:
       "Develop and maintain scalable web applications using React and modern JavaScript.",
+    status: "Not Allowed",
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ let jobs = [
     type: "Full-Time",
     salary: "$110,000 - $140,000",
     description: "Build REST APIs and work with Azure cloud services.",
+    status: "Not Allowed",
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ let jobs = [
     salary: "$115,000 - $145,000",
     description:
       "Design scalable systems and optimize high-traffic applications.",
+    status: "Not Allowed",
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ let jobs = [
     type: "Contract",
     salary: "$100,000 - $130,000",
     description: "Create dynamic user interfaces and improve user experience.",
+    status: "Not Allowed",
   },
   {
     id: 5,
@@ -45,6 +49,7 @@ let jobs = [
     type: "Full-Time",
     salary: "$125,000 - $155,000",
     description: "Build responsive streaming platform interfaces.",
+    status: "Not Allowed",
   },
   {
     id: 6,
@@ -54,6 +59,7 @@ let jobs = [
     type: "Full-Time",
     salary: "$105,000 - $135,000",
     description: "Work on internal tools and automation systems.",
+    status: "Not Allowed",
   },
   {
     id: 7,
@@ -63,6 +69,7 @@ let jobs = [
     type: "Remote",
     salary: "$95,000 - $120,000",
     description: "Develop music streaming web applications.",
+    status: "Not Allowed",
   },
   {
     id: 8,
@@ -72,62 +79,113 @@ let jobs = [
     type: "Full-Time",
     salary: "$115,000 - $145,000",
     description: "Improve booking experience and optimize performance.",
+    status: "Not Allowed",
   },
 ];
 
-// export default jobs;
-//get element by id
-let totaljob = getValueById("Total-job");
-totaljob.innerText = `${jobs.length}`;
-
-// show each jobs info dynamically
-const container = document.getElementById("show-all-jobs");
-for (let i = 0; i < jobs.length; i++) {
-  const job = jobs[i];
+// create Card---------------------------------------------------------------------
+function createCard(job) {
   const card = document.createElement("div");
   card.className = "bg-white p-7 rounded-xl mt-6";
-  card.id = `job-${job.id}`;
 
   card.innerHTML = `
-
-     <div class='flex justify-between'>
-         <h2 class="text-2xl font-bold">${job.companyName}</h2>
-        <button class="btn " id="delete-${job.id}"><i class="fa-regular fa-trash-can"></i></button>
-       </div>
+    <div class="flex justify-between">
+      <h2 class="text-2xl font-bold">${job.companyName}</h2>
+      <button class="btn delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+    </div>
     <p class="font-semibold">${job.position}</p>
     <p class="mt-3 text-sm">${job.location} • ${job.type} • ${job.salary}</p>
+    <div class="badge badge-ghost mt-3">${job.status}</div>
     <p class="mt-3">${job.description}</p>
     <div class="mt-4">
-      <button class="btn btn-success" id="interview-${job.id}">Interview</button>
-<button class="btn btn-outline btn-error" id="rejected-${job.id}">Rejected</button>
-      
+      <button class="btn btn-success interview-btn">Interview</button>
+      <button class="btn btn-outline btn-error rejected-btn">Rejected</button>
     </div>
   `;
 
-  container.appendChild(card);
+  const status = card.querySelector(".badge");
 
-  // Delete------------------------------------------
-  document.getElementById(`delete-${job.id}`).addEventListener("click", () => {
-    jobs = jobs.filter((j) => j.id !== job.id);
+  //jokon selected hbe-----
+  if (job.status === "selected") {
+    card.classList.add("bg-green-100", "border-l-4", "border-green-400");
+    status.classList.add("badge-success");
+    status.innerText = "Selected";
+  }
+  //rejected er jonno------
+  if (job.status === "rejected") {
+    card.classList.add("bg-red-100", "border-l-4", "border-red-400");
+    status.classList.add("badge-error");
+    status.innerText = "Rejected";
+  }
 
-    document.getElementById(`job-${job.id}`).remove();
-
-    totaljob.innerText = jobs.length;
+  // when click btn selected ------
+  card.querySelector(".interview-btn").addEventListener("click", () => {
+    job.status = "selected";
+    renderFun();
   });
 
-  // interview------------------------------------------------------
-  document
-    .getElementById(`interview-${job.id}`)
-    .addEventListener("click", () => {
-      card.classList.remove("bg-white", "bg-red-100");
-      card.classList.add("bg-green-100", "border-l-4", "border-green-400");
-    });
+  //rejected-----
+  card.querySelector(".rejected-btn").addEventListener("click", () => {
+    job.status = "rejected";
+    renderFun();
+  });
 
-  // rejected--------------------------------------------------------------
-  document
-    .getElementById(`rejected-${job.id}`)
-    .addEventListener("click", () => {
-      card.classList.remove("bg-white", "bg-green-100");
-      card.classList.add("bg-red-100", "border-l-4", "border-red-400");
-    });
+  card.querySelector(".delete-btn").addEventListener("click", () => {
+    jobs = jobs.filter((j) => j.id !== job.id);
+    renderFun();
+  });
+
+  return card;
 }
+
+//  render function---------------------------------------------------------------------------------------
+
+function renderFun() {
+  const allContainer = getValueById("show-all-jobs");
+  const interviewContainer = getValueById("interview-sel");
+  const rejectedContainer = getValueById("rejected-sel");
+
+  allContainer.innerHTML = "";
+  interviewContainer.innerHTML = "";
+  rejectedContainer.innerHTML = "";
+
+  let interviewCount = 0;
+  let rejectedCount = 0;
+
+  jobs.forEach((job) => {
+    allContainer.appendChild(createCard(job));
+
+    if (job.status === "selected") {
+      interviewContainer.appendChild(createCard(job));
+      interviewCount++;
+    }
+
+    if (job.status === "rejected") {
+      rejectedContainer.appendChild(createCard(job));
+      rejectedCount++;
+    }
+  });
+
+  // update header count-------
+
+  getValueById("Total-jobsscnt").innerText = `${jobs.length} jobs`;
+  getValueById("Total-job").innerText = `${jobs.length}`;
+  getValueById("interview-count").innerText = interviewCount;
+  getValueById("rejected-count").innerText = rejectedCount;
+
+  const interviewEmpty = getValueById("interview-empty");
+  if (interviewCount > 0) {
+    interviewEmpty.classList.add("hidden");
+  } else {
+    interviewEmpty.classList.remove("hidden");
+  }
+
+  const rejectedEmpty = getValueById("rejected-empty");
+  if (rejectedCount > 0) {
+    rejectedEmpty.classList.add("hidden");
+  } else {
+    rejectedEmpty.classList.remove("hidden");
+  }
+}
+
+renderFun();

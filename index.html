@@ -25,12 +25,12 @@
 
             <div class="bg-emerald-50 px-10 py-15 rounded-xl mt-7">
                 <h1 class="text-xl font-semibold">Interview :</h1>
-                <p class="text-3xl font-bold text-green-400">0</p>
+                <p id="interview-count" class="text-3xl font-bold text-green-400">0</p>
             </div>
 
             <div class="bg-emerald-50 px-10 py-15 rounded-xl mt-7">
                 <h1 class="text-xl font-semibold">Rejected :</h1>
-                <p class="text-3xl font-bold text-red-400">0</p>
+                <p id="rejected-count" class="text-3xl font-bold text-red-400">0</p>
             </div>
 
         </div>
@@ -41,7 +41,7 @@
     <section class="mt-20">
         <div class="flex justify-between ">
             <h3 class="text-2xl font-semibold">Available Job</h3>
-            <p id="Total-job" class="font-bold opacity-60">0 jobs</p>
+            <p id="Total-jobsscnt" class="font-bold opacity-60">0 jobs</p>
         </div>
         <div class="mt-10 space-x-5 ">
             <button onclick="btnop('show-all-jobs')" id="allJobs" class="btn btn-soft btn-primary ">All</button>
@@ -56,26 +56,28 @@
 
     </section>
 
-    <!-- interview section show  ------------------------->
+    <!-- interview section  ------------------------->
     <section id="interview-container" class="hidden mt-5 ">
-        <div class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
+        <div id="interview-empty" class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
             <div>
                 <img src="./img/jobs.png" alt="" srcset="">
             </div>
             <h1 class="text-3xl font-bold">No Jobs Available</h1>
             <p>Check back soon for new job opportunities </p>
         </div>
+        <div id="interview-sel"></div>
     </section>
 
-    <!-- Rejected section show  ------------------------->
+    <!-- Rejected section  ------------------------->
     <section id="reajected-container" class="hidden mt-5 ">
-        <div class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
+        <div id="rejected-empty" class="bg-white text-center flex justify-center items-center flex-col space-x-3 p-15">
             <div>
                 <img src="./img/jobs.png" alt="" srcset="">
             </div>
             <h1 class="text-3xl font-bold">No Jobs Available</h1>
             <p>Check back soon for new job opportunities </p>
         </div>
+        <div id="rejected-sel"></div>
     </section>
 </body>
 <script src="./srcipts/machine.js"></script>

@@ -13,4 +13,5 @@ function btnop(id) {
   rejected.classList.add("hidden");
   alljobInfo.classList.add("hidden");
   selected.classList.remove("hidden");
+  selected.classList.add("bg-blue-200");
 }
